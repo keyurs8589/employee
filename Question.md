@@ -7,3 +7,4 @@
 7) need as Select Gender - defaultValue - choose to set at initialvalue of state or at html tag level?
 8) DatePicker, how to uninstall package?
 9) Validation at actual industrial level ?
+10) When should we trim before storage / triming is not possible at the change event?
