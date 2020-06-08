@@ -23,11 +23,11 @@ const BasicDetails = () => {
   };
 
   const displayDetails = () => {
-    basicDetails.firstName === "" ||
-    basicDetails.lastName === "" ||
+    basicDetails.firstName.trim() === "" ||
+    basicDetails.lastName.trim() === "" ||
     basicDetails.gender === "Select Gender" ||
-    basicDetails.dateOfBirth === "" ||
-    basicDetails.email === ""
+    basicDetails.dateOfBirth.trim() === "" ||
+    basicDetails.email.trim() === ""
       ? console.log("Please fill all the required field.")
       : console.log(basicDetails);
   };
