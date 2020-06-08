@@ -1,0 +1,7 @@
+.required {
+  color: red;
+}
+.round-button {
+    border-radius: 22.5px;
+    width: 140px;
+}

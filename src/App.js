@@ -1,10 +1,11 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./styles/custom.css";
+import BasicDetails from "./components/BasicDetails";
 
 function App() {
   return (
     <div>
-        Hello
+      <BasicDetails />
     </div>
   );
 }
