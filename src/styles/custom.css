@@ -2,6 +2,9 @@
   color: red;
 }
 .round-button {
-    border-radius: 22.5px;
-    width: 140px;
+  border-radius: 22.5px;
+  width: 140px;
+}
+.react-datepicker-wrapper {
+  width: 100% !important;
 }

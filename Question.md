@@ -1,3 +1,4 @@
+08-06-2020
 1) When to use .js ans .jsx file?
 2) correct way to use react-bootstrap and it's import.
 3) What are clean-up require when creating new create-react-app?
@@ -9,3 +10,6 @@
 9) Validation at actual industrial level ?
 10) When should we trim before storage / triming is not possible at the change event?
 11) What is strict node?
+
+09-06-2020
+1) Issue in execution sequence?
