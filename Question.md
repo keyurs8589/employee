@@ -8,3 +8,4 @@
 8) DatePicker, how to uninstall package?
 9) Validation at actual industrial level ?
 10) When should we trim before storage / triming is not possible at the change event?
+11) What is strict node?
