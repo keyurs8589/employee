@@ -21,11 +21,11 @@ const BasicDetails = () => {
   });
 
   const [basicDetailsValidation, setBasicDetailsValidation] = useState({
-    firstNameError: false,
-    lastNameError: false,
-    genderError: false,
-    dateOfBirthError: false,
-    emailError: false,
+    firstNameError: "",
+    lastNameError: "",
+    genderError: "",
+    dateOfBirthError: "",
+    emailError: "",
   });
 
   const handleDateChange = (date) => {
@@ -83,37 +83,38 @@ const BasicDetails = () => {
 
   const validateFullForm = () => {
     let validateFlag = true;
-
-    basicDetails.firstName.trim().length < 5
-      ? setErrorTrueFalse("firstName", true)
-      : setErrorTrueFalse("firstName", false);
-    basicDetails.lastName.trim().length < 5
-      ? setErrorTrueFalse("lastName", true)
-      : setErrorTrueFalse("lastName", false);
-    basicDetails.gender === "Select Gender"
-      ? setErrorTrueFalse("gender", true)
-      : setErrorTrueFalse("gender", false);
-    basicDetails.email
-      .trim()
-      .match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/) === null
-      ? setErrorTrueFalse("email", true)
-      : setErrorTrueFalse("email", false);
-
-    if (
-      basicDetailsValidation.firstNameError ||
-      basicDetailsValidation.genderError ||
-      basicDetailsValidation.lastNameError ||
-      basicDetailsValidation.dateOfBirthError ||
-      basicDetailsValidation.emailError
-    )
+    if (basicDetails.firstName.trim()) {
+      setBasicDetailsValidation({
+        ...basicDetailsValidation,
+        firstNameError: "First Name should be require.",
+      });
       validateFlag = false;
+      return validateFlag;
+    } else if (basicDetails.firstName.trim().length < 5) {
+      setErrorTrueFalse("firstName", true);
+      validateFlag = false;
+      return validateFlag;
+    }
+
+    // basicDetails.lastName.trim().length < 5
+    //   ? setErrorTrueFalse("lastName", true)
+    //   : setErrorTrueFalse("lastName", false);
+    // basicDetails.gender === "Select Gender"
+    //   ? setErrorTrueFalse("gender", true)
+    //   : setErrorTrueFalse("gender", false);
+    // basicDetails.email
+    //   .trim()
+    //   .match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/) === null
+    //   ? setErrorTrueFalse("email", true)
+    //   : setErrorTrueFalse("email", false);
 
     return validateFlag;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    validateFullForm() && console.log(basicDetails);
+    let isValidate = validateFullForm();
+    isValidate && console.log(basicDetails);
     console.log(basicDetailsValidation);
   };
 
@@ -136,16 +137,10 @@ const BasicDetails = () => {
                 value={basicDetails.firstName}
                 className="bg-light"
                 onChange={basicDetailsChange}
-                onBlur={basicDetailsValidationError}
+                // onBlur={basicDetailsValidationError}
               />
-              <div
-                className={
-                  basicDetailsValidation.firstNameError
-                    ? "ml-2 text-danger"
-                    : "d-none"
-                }
-              >
-                First Name should be atleat 5 character.
+              <div className="ml-2 text-danger">
+                {basicDetailsValidation.firstNameError}
               </div>
             </Col>
             <Col className="px-3">
@@ -169,7 +164,7 @@ const BasicDetails = () => {
                 value={basicDetails.lastName}
                 className="bg-light"
                 onChange={basicDetailsChange}
-                onBlur={basicDetailsValidationError}
+                // onBlur={basicDetailsValidationError}
               />
               <div
                 className={
@@ -194,7 +189,7 @@ const BasicDetails = () => {
                 name="gender"
                 value={basicDetails.gender}
                 onChange={basicDetailsChange}
-                onBlur={basicDetailsValidationError}
+                // onBlur={basicDetailsValidationError}
               >
                 <option>Select Gender</option>
                 <option>Male</option>
@@ -220,8 +215,7 @@ const BasicDetails = () => {
                 className="bg-light form-control"
                 selected={basicDetails.dateOfBirth}
                 onChange={handleDateChange}
-                dateFormat="dd-MM-yyyy"
-                onBlur={basicDetailsValidationError}
+                dateFormat="dd-MM-yyyy"                
               />
               <div
                 className={
@@ -243,7 +237,7 @@ const BasicDetails = () => {
                 value={basicDetails.email}
                 className="bg-light"
                 onChange={basicDetailsChange}
-                onBlur={basicDetailsValidationError}
+                // onBlur={basicDetailsValidationError}
               />
               <div
                 className={

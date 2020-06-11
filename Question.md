@@ -13,3 +13,9 @@
 
 09-06-2020
 1) Issue in execution sequence?
+
+10-06-2020
+1) Do we need button type = submit ? Is it compulsory to wrap everything in form tag ? or developer choice?
+
+11-06-2020
+1) can we use tempHead instead of basicDetails, jobDetails,....?
