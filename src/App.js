@@ -51,9 +51,9 @@ function App() {
     data: {
       leavePlan: '',
       shift: '',
-      weekOffs: '',
-      holidayLists: '',
-      attendancePolicy: '',
+      weekOffs: 'Saturday, Sunday Off',
+      holidayLists: 'Ahmedabad Holiday',
+      attendancePolicy: 'Normal Shift Policy',
       onboardingFlow: '',
     },
   });
