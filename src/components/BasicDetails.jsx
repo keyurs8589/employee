@@ -1,265 +1,117 @@
-import React, { useState } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  FormControl,
-  Button,
-  Form,
-} from "react-bootstrap";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import React from 'react';
+import { Container, Row, Col, Form } from 'react-bootstrap';
+import ActiveHead from './ActiveHead';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
-const BasicDetails = () => {
-  const [basicDetails, setBasicDetails] = useState({
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    gender: "Select Gender",
-    dateOfBirth: new Date(),
-    email: "",
-  });
-
-  const [basicDetailsValidation, setBasicDetailsValidation] = useState({
-    firstNameError: "",
-    lastNameError: "",
-    genderError: "",
-    dateOfBirthError: "",
-    emailError: "",
-  });
-
-  const handleDateChange = (date) => {
-    date > new Date()
-      ? setBasicDetailsValidation({
-          ...basicDetailsValidation,
-          dateOfBirthError: true,
-        })
-      : setBasicDetailsValidation({
-          ...basicDetailsValidation,
-          dateOfBirthError: false,
-        });
-    setBasicDetails({ ...basicDetails, dateOfBirth: date });
-  };
-
-  const basicDetailsChange = (e) => {
-    setBasicDetails({
-      ...basicDetails,
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
-
-  const setErrorTrueFalse = (name, flag) => {
-    setBasicDetailsValidation({
-      ...basicDetailsValidation,
-      [`${name}Error`]: flag,
-    });
-  };
-
-  const basicDetailsValidationError = (e) => {
-    if (e.target.name === "firstName") {
-      e.target.value.trim().length < 5
-        ? setErrorTrueFalse(e.target.name, true)
-        : setErrorTrueFalse(e.target.name, false);
-    } else if (e.target.name === "lastName") {
-      e.target.value.trim().length < 5
-        ? setErrorTrueFalse(e.target.name, true)
-        : setErrorTrueFalse(e.target.name, false);
-    } else if (e.target.name === "gender") {
-      e.target.value === "Select Gender"
-        ? setErrorTrueFalse(e.target.name, true)
-        : setErrorTrueFalse(e.target.name, false);
-    } else if (e.target.name === "dateOfBirth") {
-      e.target.value.trim() === ""
-        ? setErrorTrueFalse(e.target.name, true)
-        : setErrorTrueFalse(e.target.name, false);
-    } else if (e.target.name === "email") {
-      e.target.value
-        .trim()
-        .match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/) === null
-        ? setErrorTrueFalse(e.target.name, true)
-        : setErrorTrueFalse(e.target.name, false);
-    }
-  };
-
-  const validateFullForm = () => {
-    let validateFlag = true;
-    if (basicDetails.firstName.trim()) {
-      setBasicDetailsValidation({
-        ...basicDetailsValidation,
-        firstNameError: "First Name should be require.",
-      });
-      validateFlag = false;
-      return validateFlag;
-    } else if (basicDetails.firstName.trim().length < 5) {
-      setErrorTrueFalse("firstName", true);
-      validateFlag = false;
-      return validateFlag;
-    }
-
-    // basicDetails.lastName.trim().length < 5
-    //   ? setErrorTrueFalse("lastName", true)
-    //   : setErrorTrueFalse("lastName", false);
-    // basicDetails.gender === "Select Gender"
-    //   ? setErrorTrueFalse("gender", true)
-    //   : setErrorTrueFalse("gender", false);
-    // basicDetails.email
-    //   .trim()
-    //   .match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/) === null
-    //   ? setErrorTrueFalse("email", true)
-    //   : setErrorTrueFalse("email", false);
-
-    return validateFlag;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let isValidate = validateFullForm();
-    isValidate && console.log(basicDetails);
-    console.log(basicDetailsValidation);
-  };
-
+const BasicDetails = ({ basicDetails, onDataChange, onDataErrorChange }) => {
   return (
-    <div className="border rounded-lg h6 mx-4 my-3">
-      <Container className="px-0">
-        <Row className="border-bottom font-weight-bold py-2 mb-4 h4">
-          <Col className="p-0">Basic Details</Col>
-        </Row>
-
-        <Form onSubmit={handleSubmit} className="p-0">
-          <Row className="mb-4">
-            <Col className="p-0">
-              <Form.Label className="text-uppercase font-weight-bold">
-                <label>first name</label>
-                <span className="required">*</span>
-              </Form.Label>
-              <Form.Control
-                name="firstName"
-                value={basicDetails.firstName}
-                className="bg-light"
-                onChange={basicDetailsChange}
-                // onBlur={basicDetailsValidationError}
-              />
-              <div className="ml-2 text-danger">
-                {basicDetailsValidation.firstNameError}
-              </div>
-            </Col>
-            <Col className="px-3">
-              <Form.Label className="text-uppercase font-weight-bold">
-                <label>middle name</label>
-              </Form.Label>
-              <Form.Control
-                name="middleName"
-                value={basicDetails.middleName}
-                className="bg-light"
-                onChange={basicDetailsChange}
-              />
-            </Col>
-            <Col className="p-0">
-              <Form.Label className="text-uppercase font-weight-bold">
-                <label>last name</label>
-                <span className="required">*</span>
-              </Form.Label>
-              <Form.Control
-                name="lastName"
-                value={basicDetails.lastName}
-                className="bg-light"
-                onChange={basicDetailsChange}
-                // onBlur={basicDetailsValidationError}
-              />
-              <div
-                className={
-                  basicDetailsValidation.lastNameError
-                    ? "ml-2 text-danger"
-                    : "d-none"
-                }
-              >
-                Last Name should be atleat 5 character.
-              </div>
-            </Col>
-          </Row>
-          <Row className="mb-5">
-            <Col className="p-0">
-              <Form.Label className="text-uppercase font-weight-bold">
-                <label>gender</label>
-                <span className="required">*</span>
-              </Form.Label>
-              <Form.Control
-                as="select"
-                className="bg-light"
-                name="gender"
-                value={basicDetails.gender}
-                onChange={basicDetailsChange}
-                // onBlur={basicDetailsValidationError}
-              >
-                <option>Select Gender</option>
-                <option>Male</option>
-                <option>Female</option>
-              </Form.Control>
-              <div
-                className={
-                  basicDetailsValidation.genderError
-                    ? "ml-2 text-danger"
-                    : "d-none"
-                }
-              >
-                Gender should Male or Female.
-              </div>
-            </Col>
-            <Col className="px-3">
-              <Form.Label className="text-uppercase font-weight-bold">
-                <label>date of birth</label>
-                <span className="required">*</span>
-              </Form.Label>
-              <DatePicker
-                name="dateOfBirth"
-                className="bg-light form-control"
-                selected={basicDetails.dateOfBirth}
-                onChange={handleDateChange}
-                dateFormat="dd-MM-yyyy"                
-              />
-              <div
-                className={
-                  basicDetailsValidation.dateOfBirthError
-                    ? "ml-2 text-danger"
-                    : "d-none"
-                }
-              >
-                Date of Birth should not be future date / null.
-              </div>
-            </Col>
-            <Col className="p-0">
-              <Form.Label className="text-uppercase font-weight-bold">
-                <label>email</label>
-                <span className="required">*</span>
-              </Form.Label>
-              <FormControl
-                name="email"
-                value={basicDetails.email}
-                className="bg-light"
-                onChange={basicDetailsChange}
-                // onBlur={basicDetailsValidationError}
-              />
-              <div
-                className={
-                  basicDetailsValidation.emailError
-                    ? "ml-2 text-danger"
-                    : "d-none"
-                }
-              >
-                Please enter valid Email Id.
-              </div>
-            </Col>
-          </Row>
-          <Row className="mb-3">
-            <Col className="p-0 text-center">
-              <Button variant="success" className="round-button" type="submit">
-                Next
-              </Button>
-            </Col>
-          </Row>
-        </Form>
-      </Container>
-    </div>
+    <Container fluid className='w-100 p-0'>
+      <Row className='m-0'>
+        <Col className='p-0 mx-2'>
+          <ActiveHead activeHead={basicDetails.head} />
+        </Col>
+      </Row>
+      <Row className='m-0'>
+        <Col className='p-0 mx-2'>
+          <Form.Label className='text-uppercase font-weight-bold mb-0'>
+            <label className='mb-0'>first name</label>
+            <span className='required'>*</span>
+          </Form.Label>
+          <Form.Control
+            name='firstName'
+            value={basicDetails.data.firstName}
+            className='bg-light'
+            onChange={(event) => onDataChange(event)}
+            onFocus={(event) => onDataErrorChange(event)}
+          />
+          <div className='ml-2 text-danger'>
+            {basicDetails.dataError.firstName}
+          </div>
+        </Col>
+        <Col className='p-0 mx-2'>
+          <Form.Label className='text-uppercase font-weight-bold mb-0'>
+            <label className='mb-0'>middle name</label>
+          </Form.Label>
+          <Form.Control
+            name='middleName'
+            value={basicDetails.data.middleName}
+            className='bg-light'
+            onChange={(event) => onDataChange(event)}
+          />
+        </Col>
+        <Col className='p-0 mx-2'>
+          <Form.Label className='text-uppercase font-weight-bold mb-0'>
+            <label className='mb-0'>last name</label>
+            <span className='required'>*</span>
+          </Form.Label>
+          <Form.Control
+            name='lastName'
+            value={basicDetails.data.lastName}
+            className='bg-light'
+            onChange={(event) => onDataChange(event)}
+            onFocus={(event) => onDataErrorChange(event)}
+          />
+          <div className='ml-2 text-danger'>
+            {basicDetails.dataError.lastName}
+          </div>
+        </Col>
+      </Row>
+      <Row className='m-0 mb-2'>
+        <Col className='p-0 mx-2'>
+          <Form.Label className='text-uppercase font-weight-bold mb-0'>
+            <label className='mb-0'>gender</label>
+            <span className='required'>*</span>
+          </Form.Label>
+          <Form.Control
+            as='select'
+            className='bg-light'
+            name='gender'
+            value={basicDetails.data.gender}
+            onChange={(event) => onDataChange(event)}
+            onFocus={(event) => onDataErrorChange(event)}
+          >
+            <option>Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+          </Form.Control>
+          <div className='ml-2 text-danger'>
+            {basicDetails.dataError.gender}
+          </div>
+        </Col>
+        <Col className='p-0 mx-2'>
+          <Form.Label className='text-uppercase font-weight-bold mb-0'>
+            <label className='mb-0'>date of birth</label>
+            <span className='required'>*</span>
+          </Form.Label>
+          <DatePicker
+            name='dateOfBirth'
+            className='bg-light form-control'
+            selected={basicDetails.data.dateOfBirth}
+            onChange={(event) => onDataChange(event)}
+            onFocus={(event) => onDataErrorChange(event)}
+            dateFormat='dd-MM-yyyy'
+          />
+          <div className='ml-2 text-danger'>
+            {basicDetails.dataError.dateOfBirth}
+          </div>
+        </Col>
+        <Col className='p-0 mx-2'>
+          <Form.Label className='text-uppercase font-weight-bold mb-0'>
+            <label className='mb-0'>email</label>
+            <span className='required'>*</span>
+          </Form.Label>
+          <Form.Control
+            name='email'
+            value={basicDetails.data.email}
+            className='bg-light'
+            onChange={(event) => onDataChange(event)}
+            onFocus={(event) => onDataErrorChange(event)}
+          />
+          <div className='ml-2 text-danger'>{basicDetails.dataError.email}</div>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

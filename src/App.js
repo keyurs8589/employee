@@ -68,7 +68,7 @@ function App() {
       annualSalary: '',
     },
   });
-  const [activeIndex, setActiveIndex] = useState(4);
+  const [activeIndex, setActiveIndex] = useState(1);
 
   const checkValidationBasicDetails = () => {
     let tempObj = Object.assign({}, basicDetails.dataError);
@@ -170,6 +170,7 @@ function App() {
     if (!errorFlag) {
       console.log(basicDetails);
       console.log(jobDetails);
+      console.log(jobFilling);
       console.log(salaryDetails);
     }
     if (!errorFlag && activeIndex >= 1 && activeIndex <= 3) {
@@ -215,6 +216,13 @@ function App() {
         });
       }
     } else if (activeIndex === 3) {
+      setJobFilling({
+        ...jobFilling,
+        data: {
+          ...jobFilling.data,
+          [event.target.name]: event.target.value,
+        },
+      });
     } else if (activeIndex === 4) {
       if (event.target.name === 'annualSalary') {
         setSalaryDetails({
@@ -255,7 +263,7 @@ function App() {
       });
     }
   };
-  // console.log(jobDetails);
+
   return (
     <Container className='border rounded my-2 p-0'>
       <Row className='mb-3'>
@@ -322,7 +330,7 @@ function App() {
                   className='round-button'
                   onClick={submitHandler}
                 >
-                  Next
+                  {activeIndex === 4 ? `Submit` : `Next`}
                 </Button>
               </Col>
             </Row>
