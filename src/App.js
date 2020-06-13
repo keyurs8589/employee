@@ -1,91 +1,95 @@
-import React, { useState } from "react";
-import "./styles/custom.css";
-import { Container, Row, Col, Button } from "react-bootstrap";
-import ActiveData from "./components/ActiveData";
-import HeadRadio from "./components/HeadRadio";
+import React, { useState } from 'react';
+import './styles/custom.css';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import ActiveData from './components/ActiveData';
+import HeadRadio from './components/HeadRadio';
 
 function App() {
   const [basicDetails, setBasicDetails] = useState({
-    head: "Basic Details",
+    head: 'Basic Details',
     data: {
-      firstName: "",
-      middleName: "",
-      lastName: "",
-      gender: "",
-      dateOfBirth: "",
-      email: "",
+      firstName: '',
+      middleName: '',
+      lastName: '',
+      gender: '',
+      dateOfBirth: '',
+      email: '',
     },
     dataError: {
-      firstName: "",
-      lastName: "",
-      gender: "",
-      dateOfBirth: "",
-      email: "",
+      firstName: '',
+      lastName: '',
+      gender: '',
+      dateOfBirth: '',
+      email: '',
     },
   });
   const [jobDetails, setJobDetails] = useState({
-    head: "Job Details",
+    head: 'Job Details',
     data: {
-      dateOfJoining: "",
-      numberSeries: "",
-      jobTitle: "",
-      employeeNumber: "",
-      department: "",
-      location: "",
-      reportingManager: "",
-      workerType: "Permenant",
-      probationPeriodNumber: "",
-      probationPeriodUnit: "Month",
-      userType: "Developer",
+      dateOfJoining: '',
+      numberSeries: '',
+      jobTitle: '',
+      employeeNumber: '',
+      department: '',
+      location: '',
+      reportingManager: '',
+      workerType: 'Permenant',
+      probationPeriodNumber: '',
+      probationPeriodUnit: 'Month',
+      userType: 'Developer',
     },
     dataError: {
-      dateOfJoining: "",
-      jobTitle: "",
-      department: "",
-      location: "",
-      reportingManager: "",
+      dateOfJoining: '',
+      jobTitle: '',
+      department: '',
+      location: '',
+      reportingManager: '',
     },
   });
   const [jobFilling, setJobFilling] = useState({
-    head: "Job Filling",
+    head: 'Job Filling',
     data: {
-      pqr: "",
-    },
-    dataError: {
-      pqr: "",
+      leavePlan: '',
+      shift: '',
+      weekOffs: '',
+      holidayLists: '',
+      attendancePolicy: '',
+      onboardingFlow: '',
     },
   });
   const [salaryDetails, setSalaryDetails] = useState({
-    head: "Salary Details",
+    head: 'Salary Details',
     data: {
-      xyz: "",
+      pfEligible: false,
+      esiEligible: false,
+      annualSalary: '',
     },
     dataError: {
-      xyz: "",
+      annualSalary: '',
     },
   });
-  const [activeIndex, setActiveIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(3);
 
   const checkValidationBasicDetails = () => {
     let tempObj = Object.assign({}, basicDetails.dataError);
     let errorFlag = false;
     if (!basicDetails.data.firstName.trim()) {
-      tempObj.firstName = "First Name is require.";
+      tempObj.firstName = 'First Name is require.';
       errorFlag = true;
     }
     if (!basicDetails.data.lastName.trim()) {
-      tempObj.lastName = "Last Name is require.";
+      tempObj.lastName = 'Last Name is require.';
       errorFlag = true;
     }
     if (
       !basicDetails.data.gender ||
-      basicDetails.data.gender === "Select Gender"
+      basicDetails.data.gender === 'Select Gender'
     ) {
-      tempObj.gender = "Gender should be selected.";
+      tempObj.gender = 'Gender should be selected.';
       errorFlag = true;
     }
     if (!basicDetails.data.dateOfBirth) {
-      tempObj.dateOfBirth = "Select Date Of Birth.";
+      tempObj.dateOfBirth = 'Select Date Of Birth.';
       errorFlag = true;
     }
     if (
@@ -93,7 +97,7 @@ function App() {
         .trim()
         .match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/)
     ) {
-      tempObj.email = "Enter Valid Email Id.";
+      tempObj.email = 'Enter Valid Email Id.';
       errorFlag = true;
     }
     setBasicDetails({ ...basicDetails, dataError: tempObj });
@@ -104,32 +108,32 @@ function App() {
     let tempObj = Object.assign({}, jobDetails.dataError);
     let errorFlag = false;
     if (!jobDetails.data.dateOfJoining) {
-      tempObj.dateOfJoining = "Date of Joining is require.";
+      tempObj.dateOfJoining = 'Date of Joining is require.';
       errorFlag = true;
     }
     if (
       !jobDetails.data.jobTitle ||
-      jobDetails.data.jobTitle === "Select Job Title"
+      jobDetails.data.jobTitle === 'Select Job Title'
     ) {
-      tempObj.jobTitle = "Job Title should be selected.";
+      tempObj.jobTitle = 'Job Title should be selected.';
       errorFlag = true;
     }
     if (
       !jobDetails.data.department ||
-      jobDetails.data.department === "Select Department"
+      jobDetails.data.department === 'Select Department'
     ) {
-      tempObj.department = "Department should be selected.";
+      tempObj.department = 'Department should be selected.';
       errorFlag = true;
     }
     if (
       !jobDetails.data.location ||
-      jobDetails.data.location === "Select Location"
+      jobDetails.data.location === 'Select Location'
     ) {
-      tempObj.location = "Location should be selected.";
+      tempObj.location = 'Location should be selected.';
       errorFlag = true;
     }
     if (!jobDetails.data.reportingManager.trim()) {
-      tempObj.reportingManager = "Reporting Manager should be allocated.";
+      tempObj.reportingManager = 'Reporting Manager should be allocated.';
       errorFlag = true;
     }
     setJobDetails({ ...jobDetails, dataError: tempObj });
@@ -143,8 +147,13 @@ function App() {
   };
 
   const checkValidationSalaryDetails = () => {
-    // let tempObj = Object.assign({}, salaryDetails.dataError);
+    let tempObj = Object.assign({}, salaryDetails.dataError);
     let errorFlag = false;
+    if (!salaryDetails.data.annualSalary.trim()) {
+      tempObj.annualSalary = 'Annual Salary is must.';
+      errorFlag = true;
+    }
+    setSalaryDetails({ ...salaryDetails, dataError: tempObj });
     return errorFlag;
   };
   const submitHandler = () => {
@@ -158,9 +167,12 @@ function App() {
     } else if (activeIndex === 4) {
       errorFlag = checkValidationSalaryDetails();
     }
-    if (!errorFlag && activeIndex >= 1 && activeIndex <= 3) {
+    if (!errorFlag) {
       console.log(basicDetails);
       console.log(jobDetails);
+      console.log(salaryDetails);
+    }
+    if (!errorFlag && activeIndex >= 1 && activeIndex <= 3) {
       setActiveIndex(activeIndex + 1);
     }
   };
@@ -204,6 +216,23 @@ function App() {
       }
     } else if (activeIndex === 3) {
     } else if (activeIndex === 4) {
+      if (event.target.name === 'annualSalary') {
+        setSalaryDetails({
+          ...salaryDetails,
+          data: {
+            ...salaryDetails.data,
+            [event.target.name]: event.target.value,
+          },
+        });
+      } else {
+        setSalaryDetails({
+          ...salaryDetails,
+          data: {
+            ...salaryDetails.data,
+            [event.target.name]: event.target.checked,
+          },
+        });
+      }
     }
   };
 
@@ -211,46 +240,50 @@ function App() {
     if (activeIndex === 1) {
       setBasicDetails({
         ...basicDetails,
-        dataError: { ...basicDetails.dataError, [event.target.name]: "" },
+        dataError: { ...basicDetails.dataError, [event.target.name]: '' },
       });
     } else if (activeIndex === 2) {
       setJobDetails({
         ...jobDetails,
-        dataError: { ...jobDetails.dataError, [event.target.name]: "" },
+        dataError: { ...jobDetails.dataError, [event.target.name]: '' },
       });
     } else if (activeIndex === 3) {
     } else if (activeIndex === 4) {
+      setSalaryDetails({
+        ...salaryDetails,
+        dataError: { ...salaryDetails.dataError, [event.target.name]: '' },
+      });
     }
   };
   // console.log(jobDetails);
   return (
-    <Container className="border rounded my-2 p-0">
-      <Row className="mb-3">
-        <Col className="p-0">
-          <Container className="border-bottom p-0">
-            <Row className="m-1 text-center">
-              <Col className="mb-0 h4">
+    <Container className='border rounded my-2 p-0'>
+      <Row className='mb-3'>
+        <Col className='p-0'>
+          <Container className='border-bottom p-0'>
+            <Row className='m-1 text-center'>
+              <Col className='mb-0 h4'>
                 <HeadRadio
-                  labelHead="Basic Details"
-                  activeHead={activeIndex === 1 ? "checked" : ""}
+                  labelHead='Basic Details'
+                  activeHead={activeIndex === 1 ? 'checked' : ''}
                 ></HeadRadio>
               </Col>
-              <Col className="mb-0 h4">
+              <Col className='mb-0 h4'>
                 <HeadRadio
-                  labelHead="Job Details"
-                  activeHead={activeIndex === 2 ? "checked" : ""}
+                  labelHead='Job Details'
+                  activeHead={activeIndex === 2 ? 'checked' : ''}
                 ></HeadRadio>
               </Col>
-              <Col className="mb-0 h4">
+              <Col className='mb-0 h4'>
                 <HeadRadio
-                  labelHead="Job Filling"
-                  activeHead={activeIndex === 3 ? "checked" : ""}
+                  labelHead='Job Filling'
+                  activeHead={activeIndex === 3 ? 'checked' : ''}
                 ></HeadRadio>
               </Col>
-              <Col className="mb-0 h4">
+              <Col className='mb-0 h4'>
                 <HeadRadio
-                  labelHead="Salary Details"
-                  activeHead={activeIndex === 4 ? "checked" : ""}
+                  labelHead='Salary Details'
+                  activeHead={activeIndex === 4 ? 'checked' : ''}
                 ></HeadRadio>
               </Col>
             </Row>
@@ -258,10 +291,10 @@ function App() {
         </Col>
       </Row>
       <Row>
-        <Col className="p-0">
-          <Container className="p-0">
-            <Row className="m-0">
-              <Col className="w-100 p-0">
+        <Col className='p-0'>
+          <Container className='p-0'>
+            <Row className='m-0'>
+              <Col className='w-100 p-0'>
                 <ActiveData
                   activeIndex={activeIndex}
                   basicDetails={basicDetails}
@@ -273,11 +306,11 @@ function App() {
                 />
               </Col>
             </Row>
-            <Row className="m-1 text-center px-5">
+            <Row className='m-1 text-center px-5'>
               <Col>
                 <Button
-                  variant="danger"
-                  className="round-button"
+                  variant='danger'
+                  className='round-button'
                   onClick={backHandler}
                 >
                   Back
@@ -285,8 +318,8 @@ function App() {
               </Col>
               <Col>
                 <Button
-                  variant="success"
-                  className="round-button"
+                  variant='success'
+                  className='round-button'
                   onClick={submitHandler}
                 >
                   Next
