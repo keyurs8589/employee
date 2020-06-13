@@ -68,7 +68,7 @@ function App() {
       annualSalary: '',
     },
   });
-  const [activeIndex, setActiveIndex] = useState(3);
+  const [activeIndex, setActiveIndex] = useState(4);
 
   const checkValidationBasicDetails = () => {
     let tempObj = Object.assign({}, basicDetails.dataError);
