@@ -26,5 +26,6 @@
 
 13-06-2020
 
-1. how file attachment work?
-2.
+1. how file attachment work? and bootstrap functioning?
+2. Any benifits of making more nested upto inputbox level component?
+3.

@@ -184,6 +184,77 @@ function App() {
     }
   };
 
+  const cancelHandler = () => {
+    if (activeIndex === 1) {
+      setBasicDetails({
+        ...basicDetails,
+        data: {
+          firstName: '',
+          middleName: '',
+          lastName: '',
+          gender: '',
+          dateOfBirth: '',
+          email: '',
+        },
+        dataError: {
+          firstName: '',
+          lastName: '',
+          gender: '',
+          dateOfBirth: '',
+          email: '',
+        },
+      });
+    } else if (activeIndex === 2) {
+      setJobDetails({
+        ...setJobDetails,
+        data: {
+          dateOfJoining: '',
+          numberSeries: '',
+          jobTitle: '',
+          employeeNumber: '',
+          department: '',
+          location: '',
+          reportingManager: '',
+          workerType: 'Permenant',
+          probationPeriodNumber: '',
+          probationPeriodUnit: 'Month',
+          userType: 'Developer',
+        },
+        dataError: {
+          dateOfJoining: '',
+          jobTitle: '',
+          department: '',
+          location: '',
+          reportingManager: '',
+        },
+      });
+    } else if (activeIndex === 3) {
+      setJobFilling({
+        ...jobFilling,
+        data: {
+          leavePlan: '',
+          shift: '',
+          weekOffs: 'Saturday, Sunday Off',
+          holidayLists: 'Ahmedabad Holiday',
+          attendancePolicy: 'Normal Shift Policy',
+          onboardingFlow: '',
+        },
+      });
+    } else if (activeIndex === 4) {
+      setSalaryDetails({
+        ...salaryDetails,
+        data: {
+          pfEligible: false,
+          esiEligible: false,
+          annualSalary: '',
+        },
+        dataError: {
+          annualSalary: '',
+        },
+      });
+    }
+  };
+
   const onDataChange = (event) => {
     if (activeIndex === 1) {
       if (!event.target) {
@@ -315,6 +386,15 @@ function App() {
               </Col>
             </Row>
             <Row className='m-1 text-center px-5'>
+              <Col>
+                <Button
+                  variant='danger'
+                  className='round-button'
+                  onClick={cancelHandler}
+                >
+                  Cancel
+                </Button>
+              </Col>
               <Col>
                 <Button
                   variant='danger'

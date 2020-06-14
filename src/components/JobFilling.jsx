@@ -3,6 +3,9 @@ import { Container, Row, Col, Form } from 'react-bootstrap';
 import ActiveHead from './ActiveHead';
 
 const JobFilling = ({ jobFilling, onDataChange }) => {
+  const change = (e) => {
+    console.log(e.target.value);
+  };
   return (
     <Container fluid className='w-100 p-0'>
       <Row className='m-0'>
@@ -22,7 +25,12 @@ const JobFilling = ({ jobFilling, onDataChange }) => {
               onChange={(event) => onDataChange(event)}
               onFocus={(event) => onDataErrorChange(event)}
             /> */}
-          <Form.File id='custom-file' label='Custom file input' custom />
+          <Form.File
+            id='custom-file'
+            label='Custom file input'
+            custom
+            onChange={change}
+          />
         </Col>
         <Col className='p-0 mx-2'>
           <Form.Label className='text-uppercase font-weight-bold mb-0'>
@@ -107,7 +115,12 @@ const JobFilling = ({ jobFilling, onDataChange }) => {
               onChange={(event) => onDataChange(event)}
               onFocus={(event) => onDataErrorChange(event)}
             /> */}
-          <Form.File id='custom-file' label='Custom file input' custom />
+          <Form.File
+            id='custom-file'
+            label='Custom file input'
+            custom
+            onChange={change}
+          />
         </Col>
       </Row>
     </Container>
