@@ -30,3 +30,7 @@
 2. Any benifits of making more nested upto inputbox level component?
 
 14-06-2020
+
+1. what is exports? what is module.exports? any connection between export default ?
+2. what is local installation and global installation ?
+3. what is diffrence between yarn and npm? when should we use yarn?
