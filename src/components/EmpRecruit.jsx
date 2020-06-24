@@ -5,13 +5,9 @@ import HeadRadio from './HeadRadio';
 import { connect } from 'react-redux';
 import {
   addBasicDetails,
-  updateBasicDetails,
   addJobDetails,
-  updateJobDetails,
   addJobFilling,
-  updateJobFilling,
   addSalaryDetails,
-  updateSalaryDetails,
 } from './../employeeRedux/empAction';
 
 const EmpRecruit = ({
@@ -23,10 +19,6 @@ const EmpRecruit = ({
   addJobDetails,
   addJobFilling,
   addSalaryDetails,
-  updateBasicDetails,
-  updateJobDetails,
-  updateJobFilling,
-  updateSalaryDetails,
   onSubmit,
 }) => {
   const [basicDetails, setBasicDetails] = useState({
@@ -465,16 +457,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     addBasicDetails: (basicDetails) =>
       dispatch(addBasicDetails({ basicDetails: basicDetails })),
-    updateBasicDetails: (basicDetails) =>
-      dispatch(updateBasicDetails(basicDetails)),
     addJobDetails: (jobDetails) => dispatch(addJobDetails(jobDetails)),
-    updateJobDetails: (jobDetails) => dispatch(updateJobDetails(jobDetails)),
     addJobFilling: (jobFilling) => dispatch(addJobFilling(jobFilling)),
-    updateJobFilling: (jobFilling) => dispatch(updateJobFilling(jobFilling)),
     addSalaryDetails: (salaryDetails) =>
       dispatch(addSalaryDetails(salaryDetails)),
-    updateSalaryDetails: (salaryDetails) =>
-      dispatch(updateSalaryDetails(salaryDetails)),
   };
 };
 

@@ -1,12 +1,8 @@
 import {
   ADD_EMP_BASIC_DETAILS,
-  UPDATE_EMP_BASIC_DETAILS,
   ADD_JOB_DETAILS,
-  UPDATE_JOB_DETAILS,
   ADD_JOB_FILLING,
-  UPDATE_JOB_FILLING,
   ADD_SALARY_DETAILS,
-  UPDATE_SALARY_DETAILS,
 } from './empType';
 
 const initialState = {
@@ -55,19 +51,16 @@ const empReducer = (state = initialState, action) => {
         basicDetails: action.payload.basicDetails,
       };
     case ADD_JOB_DETAILS:
-    case UPDATE_JOB_DETAILS:
       return {
         ...state,
         jobDetails: action.payload,
       };
     case ADD_JOB_FILLING:
-    case UPDATE_JOB_FILLING:
       return {
         ...state,
         jobFilling: action.payload,
       };
     case ADD_SALARY_DETAILS:
-    case UPDATE_SALARY_DETAILS:
       return {
         ...state,
         salaryDetails: action.payload,
