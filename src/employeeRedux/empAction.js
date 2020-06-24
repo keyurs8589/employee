@@ -17,12 +17,10 @@ import {
 //   };
 // };
 
-export const addBasicDetails = (empBasicDetails) => {
-  return {
-    type: ADD_EMP_BASIC_DETAILS,
-    payload: empBasicDetails,
-  };
-};
+export const addBasicDetails = (empBasicDetails) => ({
+  type: ADD_EMP_BASIC_DETAILS,
+  payload: empBasicDetails,
+});
 
 export const updateBasicDetails = (empBasicDetails) => {
   return {

@@ -8,81 +8,51 @@ import {
   ADD_SALARY_DETAILS,
   UPDATE_SALARY_DETAILS,
 } from './empType';
-import { addJobDetails } from './empAction';
 
 const initialState = {
-  basicDetails: {
-    head: 'Basic Details',
-    data: {
-      firstName: '',
-      middleName: '',
-      lastName: '',
-      gender: '',
-      dateOfBirth: '',
-      email: '',
-    },
-    dataError: {
-      firstName: '',
-      lastName: '',
-      gender: '',
-      dateOfBirth: '',
-      email: '',
-    },
+  basicDet: {
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    gender: '',
+    dateOfBirth: '',
+    email: '',
   },
   jobDetails: {
-    head: 'Job Details',
-    data: {
-      dateOfJoining: '',
-      numberSeries: '',
-      jobTitle: '',
-      employeeNumber: '',
-      department: '',
-      location: '',
-      reportingManager: '',
-      workerType: 'Permenant',
-      probationPeriodNumber: '',
-      probationPeriodUnit: 'Month',
-      userType: 'Developer',
-    },
-    dataError: {
-      dateOfJoining: '',
-      jobTitle: '',
-      department: '',
-      location: '',
-      reportingManager: '',
-    },
+    dateOfJoining: '',
+    numberSeries: '',
+    jobTitle: '',
+    employeeNumber: '',
+    department: '',
+    location: '',
+    reportingManager: '',
+    workerType: 'Permenant',
+    probationPeriodNumber: '',
+    probationPeriodUnit: 'Month',
+    userType: 'Developer',
   },
   jobFilling: {
-    head: 'Job Filling',
-    data: {
-      leavePlan: '',
-      shift: '',
-      weekOffs: 'Saturday, Sunday Off',
-      holidayLists: 'Ahmedabad Holiday',
-      attendancePolicy: 'Normal Shift Policy',
-      onboardingFlow: '',
-    },
+    leavePlan: '',
+    shift: '',
+    weekOffs: 'Saturday, Sunday Off',
+    holidayLists: 'Ahmedabad Holiday',
+    attendancePolicy: 'Normal Shift Policy',
+    onboardingFlow: '',
   },
   salaryDetails: {
-    head: 'Salary Details',
-    data: {
-      pfEligible: false,
-      esiEligible: false,
-      annualSalary: '',
-    },
-    dataError: {
-      annualSalary: '',
-    },
+    pfEligible: false,
+    esiEligible: false,
+    annualSalary: '',
   },
 };
 
 const empReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_EMP_BASIC_DETAILS:
-    case UPDATE_EMP_BASIC_DETAILS:
+      console.log(action.payload);
       return {
         ...state,
-        basicDetails: action.payload,
+        basicDetails: action.payload.basicDetails,
       };
     case ADD_JOB_DETAILS:
     case UPDATE_JOB_DETAILS:
@@ -102,6 +72,8 @@ const empReducer = (state = initialState, action) => {
         ...state,
         salaryDetails: action.payload,
       };
+    default:
+      return state;
   }
 };
 

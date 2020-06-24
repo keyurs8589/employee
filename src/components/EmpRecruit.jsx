@@ -2,8 +2,33 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import ActiveData from './ActiveData';
 import HeadRadio from './HeadRadio';
+import { connect } from 'react-redux';
+import {
+  addBasicDetails,
+  updateBasicDetails,
+  addJobDetails,
+  updateJobDetails,
+  addJobFilling,
+  updateJobFilling,
+  addSalaryDetails,
+  updateSalaryDetails,
+} from './../employeeRedux/empAction';
 
-const EmpRecruit = ({ onSubmit }) => {
+const EmpRecruit = ({
+  basicDet,
+  jobDet,
+  jobFil,
+  salaryDet,
+  addBasicDetails,
+  addJobDetails,
+  addJobFilling,
+  addSalaryDetails,
+  updateBasicDetails,
+  updateJobDetails,
+  updateJobFilling,
+  updateSalaryDetails,
+  onSubmit,
+}) => {
   const [basicDetails, setBasicDetails] = useState({
     head: 'Basic Details',
     data: {
@@ -176,6 +201,10 @@ const EmpRecruit = ({ onSubmit }) => {
         ...jobFilling.data,
         ...salaryDetails.data,
       };
+      addBasicDetails(basicDetails.data);
+      addJobDetails(jobDetails.data);
+      addJobFilling(jobFilling.data);
+      addSalaryDetails(salaryDetails.data);
       onSubmit(finalData);
     }
   };
@@ -336,6 +365,7 @@ const EmpRecruit = ({ onSubmit }) => {
       });
     }
   };
+  console.log(basicDet);
   return (
     <Container className='border rounded my-2 p-0'>
       <Row className='mb-3'>
@@ -422,4 +452,30 @@ const EmpRecruit = ({ onSubmit }) => {
   );
 };
 
-export default EmpRecruit;
+const mapStateToProps = (state) => {
+  return {
+    basicDet: state.basicDet,
+    jobDet: state.jobDetails,
+    jobFil: state.jobFilling,
+    salaryDet: state.salaryDetails,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addBasicDetails: (basicDetails) =>
+      dispatch(addBasicDetails({ basicDetails: basicDetails })),
+    updateBasicDetails: (basicDetails) =>
+      dispatch(updateBasicDetails(basicDetails)),
+    addJobDetails: (jobDetails) => dispatch(addJobDetails(jobDetails)),
+    updateJobDetails: (jobDetails) => dispatch(updateJobDetails(jobDetails)),
+    addJobFilling: (jobFilling) => dispatch(addJobFilling(jobFilling)),
+    updateJobFilling: (jobFilling) => dispatch(updateJobFilling(jobFilling)),
+    addSalaryDetails: (salaryDetails) =>
+      dispatch(addSalaryDetails(salaryDetails)),
+    updateSalaryDetails: (salaryDetails) =>
+      dispatch(updateSalaryDetails(salaryDetails)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EmpRecruit);

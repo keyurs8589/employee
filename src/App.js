@@ -5,7 +5,7 @@ import EmpRecruit from './components/EmpRecruit';
 import { Provider } from 'react-redux';
 import store from './employeeRedux/store';
 
-function App() {
+const App = () => {
   const [mainFlag, setMainFlag] = useState(false);
   const onRecHandler = () => {
     setMainFlag(!mainFlag);
@@ -20,6 +20,6 @@ function App() {
       {mainFlag && <EmpRecruit onSubmit={onSubmit} />}
     </Provider>
   );
-}
+};
 
 export default App;
