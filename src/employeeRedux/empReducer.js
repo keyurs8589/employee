@@ -6,7 +6,7 @@ import {
 } from './empType';
 
 const initialState = {
-  basicDet: {
+  basicDetails: {
     firstName: '',
     middleName: '',
     lastName: '',
@@ -46,9 +46,10 @@ const empReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_EMP_BASIC_DETAILS:
       console.log(action.payload);
+      console.log({ ...state, basicDetails: action.payload });
       return {
         ...state,
-        basicDetails: action.payload.basicDetails,
+        basicDet: action.payload,
       };
     case ADD_JOB_DETAILS:
       return {

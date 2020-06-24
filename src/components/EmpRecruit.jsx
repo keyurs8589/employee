@@ -445,8 +445,9 @@ const EmpRecruit = ({
 };
 
 const mapStateToProps = (state) => {
+  console.log(state.basicDetails);
   return {
-    basicDet: state.basicDet,
+    basicDet: state.basicDetails,
     jobDet: state.jobDetails,
     jobFil: state.jobFilling,
     salaryDet: state.salaryDetails,
@@ -455,8 +456,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addBasicDetails: (basicDetails) =>
-      dispatch(addBasicDetails({ basicDetails: basicDetails })),
+    addBasicDetails: (basicDetails) => dispatch(addBasicDetails(basicDetails)),
     addJobDetails: (jobDetails) => dispatch(addJobDetails(jobDetails)),
     addJobFilling: (jobFilling) => dispatch(addJobFilling(jobFilling)),
     addSalaryDetails: (salaryDetails) =>
