@@ -49,7 +49,7 @@ const JobDetails = ({ jobDetails, onDataChange, onDataErrorChange }) => {
         </Col>
         <Col className='p-0 mx-2'>
           <Form.Label className='text-uppercase font-weight-bold mb-0'>
-            <label className='mb-0'>Number Series</label>
+            <label className='mb-0'>Job Title</label>
             <span className='required'>*</span>
           </Form.Label>
           <Form.Control
